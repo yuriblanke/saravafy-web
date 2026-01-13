@@ -4,137 +4,23 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { InstallModalProvider } from "@/components/SiteChrome/InstallModalContext";
 import { SiteHeader } from "@/components/SiteChrome/SiteHeader";
-
-type SupabaseConfig = {
-  url: string;
-  key: string;
-};
-
-function requireEnv(name: string, value: string | undefined): string {
-  if (typeof value === "string" && value.trim().length > 0) return value;
-  throw new Error(
-    `[Saravafy] Missing required env var ${name}. Configure it (e.g. in .env) and restart the dev server.`
-  );
-}
-
-function getSupabaseConfig(): SupabaseConfig {
-  const url = requireEnv(
-    "NEXT_PUBLIC_SARAVAFY_SUPABASE_URL",
-    process.env.NEXT_PUBLIC_SARAVAFY_SUPABASE_URL
-  );
-  const key = requireEnv(
-    "NEXT_PUBLIC_SARAVAFY_SUPABASE_ANON_KEY",
-    process.env.NEXT_PUBLIC_SARAVAFY_SUPABASE_ANON_KEY
-  );
-
-  return { url, key };
-}
-
-async function fetchInstallUrlFresh(
-  signal?: AbortSignal
-): Promise<string | null> {
-  const cfg = getSupabaseConfig();
-
-  const endpoint =
-    cfg.url.replace(/\/$/, "") + "/rest/v1/rpc/get_app_install_url";
-
-  const res = await fetch(endpoint, {
-    method: "POST",
-    cache: "no-store",
-    headers: {
-      apikey: cfg.key,
-      authorization: `Bearer ${cfg.key}`,
-      "content-type": "application/json",
-      "cache-control": "no-store, no-cache, must-revalidate, max-age=0",
-      pragma: "no-cache",
-    },
-    body: "{}",
-    signal,
-  });
-
-  if (!res.ok) return null;
-
-  const json = (await res.json()) as { value?: unknown };
-  const url = json && typeof json.value === "string" ? String(json.value) : "";
-
-  if (!url || url === "pending") return null;
-  return url;
-}
-
-function triggerDownload(url: string) {
-  if (!url) return;
-
-  const iframe = document.createElement("iframe");
-  iframe.style.display = "none";
-  iframe.src = url;
-  iframe.setAttribute("aria-hidden", "true");
-  document.body.appendChild(iframe);
-
-  window.setTimeout(() => {
-    try {
-      document.body.removeChild(iframe);
-    } catch {
-      // ignore
-    }
-  }, 2000);
-}
+import { useFreshInstallUrl } from "@/lib/useFreshInstallUrl";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [installUrl, setInstallUrl] = useState<string | null>(null);
+  const { installUrl } = useFreshInstallUrl();
 
   const lastFocusedRef = useRef<HTMLElement | null>(null);
-  const inflightRef = useRef<Promise<string | null> | null>(null);
-
-  const fetchAndSetInstallUrl = useCallback(async () => {
-    if (inflightRef.current) return inflightRef.current;
-
-    const controller = new AbortController();
-    const timeoutId = window.setTimeout(() => controller.abort(), 8000);
-
-    inflightRef.current = fetchInstallUrlFresh(controller.signal)
-      .then((url) => {
-        setInstallUrl(url);
-        return url;
-      })
-      .catch(() => {
-        setInstallUrl(null);
-        return null;
-      })
-      .finally(() => {
-        window.clearTimeout(timeoutId);
-        inflightRef.current = null;
-      });
-
-    return inflightRef.current;
-  }, []);
 
   const openInstallModal = useCallback(() => {
     lastFocusedRef.current = document.activeElement as HTMLElement | null;
     setIsModalOpen(true);
-
-    void fetchAndSetInstallUrl().then((url) => {
-      if (url) triggerDownload(url);
-    });
-  }, [fetchAndSetInstallUrl]);
+  }, []);
 
   const closeModal = useCallback(() => {
     setIsModalOpen(false);
     window.setTimeout(() => lastFocusedRef.current?.focus?.(), 0);
   }, []);
-
-  useEffect(() => {
-    function onPageShow() {
-      void fetchAndSetInstallUrl();
-    }
-
-    window.addEventListener("pageshow", onPageShow);
-    void fetchAndSetInstallUrl();
-
-    return () => {
-      window.removeEventListener("pageshow", onPageShow);
-    };
-  }, [fetchAndSetInstallUrl]);
 
   useEffect(() => {
     if (isModalOpen) {
