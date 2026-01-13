@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { buildThemeCssVars } from "@/theme/cssVars";
+import { SiteChrome } from "@/components/SiteChrome/SiteChrome";
 
 export const metadata: Metadata = {
   title: "Saravafy",
@@ -48,7 +49,9 @@ ${darkVars}
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <SiteChrome>{children}</SiteChrome>
+      </body>
     </html>
   );
 }
