@@ -10,8 +10,12 @@ export function buildThemeCssVars(mode: Mode): string {
   // Ajuste aqui conforme o shape real do seu colors.ts:
   // Se você tem `colors.light` e `colors.dark`, perfeito.
   // Se ainda não tem, a gente adapta depois.
-  const palette: Record<string, string> =
-    (colors as any)[mode] ?? (colors as any);
+  const colorsRecord = colors as unknown as Record<string, unknown>;
+  const candidatePalette = colorsRecord[mode];
+  const palette =
+    (typeof candidatePalette === "object" && candidatePalette !== null
+      ? (candidatePalette as Record<string, unknown>)
+      : colorsRecord) satisfies Record<string, unknown>;
 
   const lines: string[] = [];
   for (const [key, value] of Object.entries(palette)) {

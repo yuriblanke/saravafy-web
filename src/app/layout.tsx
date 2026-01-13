@@ -18,7 +18,6 @@ export default function RootLayout({
     <html lang="pt-BR" data-theme="light">
       <head>
         <style
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: `
 :root {
