@@ -10,16 +10,16 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/images/favicon-light-mode.png",
+        url: "/icons/favicon-light-mode.png",
         type: "image/png",
       },
       {
-        url: "/images/favicon-light-mode.png",
+        url: "/icons/favicon-light-mode.png",
         type: "image/png",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/images/favicon-dark-mode.png",
+        url: "/icons/favicon-dark-mode.png",
         type: "image/png",
         media: "(prefers-color-scheme: dark)",
       },

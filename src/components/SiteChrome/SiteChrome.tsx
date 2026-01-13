@@ -10,24 +10,33 @@ type SupabaseConfig = {
   key: string;
 };
 
-const DEFAULT_SUPABASE_URL = "https://ocwpcezhabgncshgsxqc.supabase.co";
-const DEFAULT_SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9jd3BjZXpoYWJnbmNzaGdzeHFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MTU5MTEsImV4cCI6MjA3NzQ5MTkxMX0.HMsmeTAlEPTTW7dOM46VJ95xpUjbUZI0zVN6lkJopFc";
-
-function getSupabaseConfig(): SupabaseConfig {
-  const url = process.env.NEXT_PUBLIC_SARAVAFY_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SARAVAFY_SUPABASE_ANON_KEY;
-
-  return {
-    url: String(url || DEFAULT_SUPABASE_URL),
-    key: String(key || DEFAULT_SUPABASE_ANON_KEY),
-  };
+function requireEnv(name: string, value: string | undefined): string {
+  if (typeof value === "string" && value.trim().length > 0) return value;
+  throw new Error(
+    `[Saravafy] Missing required env var ${name}. Configure it (e.g. in .env) and restart the dev server.`
+  );
 }
 
-async function fetchInstallUrlFresh(signal?: AbortSignal): Promise<string | null> {
+function getSupabaseConfig(): SupabaseConfig {
+  const url = requireEnv(
+    "NEXT_PUBLIC_SARAVAFY_SUPABASE_URL",
+    process.env.NEXT_PUBLIC_SARAVAFY_SUPABASE_URL
+  );
+  const key = requireEnv(
+    "NEXT_PUBLIC_SARAVAFY_SUPABASE_ANON_KEY",
+    process.env.NEXT_PUBLIC_SARAVAFY_SUPABASE_ANON_KEY
+  );
+
+  return { url, key };
+}
+
+async function fetchInstallUrlFresh(
+  signal?: AbortSignal
+): Promise<string | null> {
   const cfg = getSupabaseConfig();
 
-  const endpoint = cfg.url.replace(/\/$/, "") + "/rest/v1/rpc/get_app_install_url";
+  const endpoint =
+    cfg.url.replace(/\/$/, "") + "/rest/v1/rpc/get_app_install_url";
 
   const res = await fetch(endpoint, {
     method: "POST",
@@ -178,12 +187,13 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
             <ul className="m-0 list-disc pl-5 text-[14px] leading-[1.45] text-[color:var(--saravafy-textSecondaryOnLight)]">
               <li>
                 O Saravafy ainda não está disponível nas lojas oficiais porque é
-                um projeto cultural independente, mantido pela própria comunidade.
+                um projeto cultural independente, mantido pela própria
+                comunidade.
               </li>
               <li>Por isso, o acesso acontece diretamente pelo aplicativo.</li>
               <li>
-                O Android pode pedir uma confirmação extra na primeira instalação
-                — isso é normal e acontece apenas uma vez.
+                O Android pode pedir uma confirmação extra na primeira
+                instalação — isso é normal e acontece apenas uma vez.
               </li>
             </ul>
           </div>

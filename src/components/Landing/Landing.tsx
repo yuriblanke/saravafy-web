@@ -78,10 +78,10 @@ export function Landing() {
               Cada melodia mantém viva a tradição dos terreiros.
             </p>
             <p className="m-0 mt-2 text-[14px] leading-[1.45] text-[color:var(--saravafy-textSecondaryOnLight)] min-[960px]:text-[15px] min-[960px]:leading-[1.55]">
-              O Saravafy existe para que esse conhecimento não se perca, não seja
-              distorcido e não seja apropriado de forma irresponsável.
-              <br />
-              É uma casa digital construída pela comunidade, para a comunidade.
+              O Saravafy existe para que esse conhecimento não se perca, não
+              seja distorcido e não seja apropriado de forma irresponsável.
+              <br />É uma casa digital construída pela comunidade, para a
+              comunidade.
             </p>
           </section>
 
@@ -106,8 +106,8 @@ export function Landing() {
                 </div>
                 <div className="mt-2 whitespace-pre-line text-[13px] leading-[1.45] text-[color:var(--saravafy-textSecondaryOnLight)]">
                   O conhecimento espiritual não pertence a indivíduos, marcas ou
-                  plataformas. Ele pertence ao povo, à ancestralidade e à vivência
-                  nos terreiros.
+                  plataformas. Ele pertence ao povo, à ancestralidade e à
+                  vivência nos terreiros.
                 </div>
               </div>
 
@@ -116,8 +116,9 @@ export function Landing() {
                   Memória viva
                 </div>
                 <div className="mt-2 whitespace-pre-line text-[13px] leading-[1.45] text-[color:var(--saravafy-textSecondaryOnLight)]">
-                  Preservar não é engessar. É manter vivo, acessível e respeitado
-                  aquilo que foi transmitido pela oralidade e pela prática.
+                  Preservar não é engessar. É manter vivo, acessível e
+                  respeitado aquilo que foi transmitido pela oralidade e pela
+                  prática.
                 </div>
               </div>
 
@@ -129,8 +130,7 @@ export function Landing() {
                   Sem vaidade.{"\n"}
                   Sem hierarquia espiritual.{"\n"}
                   Sem exploração do sagrado.{"\n"}
-                  {"\n"}
-                  O Saravafy não cria autoridade — apenas abre espaço.
+                  {"\n"}O Saravafy não cria autoridade — apenas abre espaço.
                 </div>
               </div>
             </div>
@@ -175,7 +175,8 @@ export function Landing() {
             </h2>
 
             <p className="m-0 mt-2 text-[14px] leading-[1.45] text-[color:var(--saravafy-textSecondaryOnLight)] min-[960px]:text-[15px] min-[960px]:leading-[1.55]">
-              O Saravafy funciona como um acervo digital acessível por aplicativo.
+              O Saravafy funciona como um acervo digital acessível por
+              aplicativo.
             </p>
 
             <p className="m-0 mt-2 text-[14px] leading-[1.45] text-[color:var(--saravafy-textSecondaryOnLight)] min-[960px]:text-[15px] min-[960px]:leading-[1.55]">

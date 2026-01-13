@@ -15,7 +15,10 @@ export function SiteHeader({ onInstallClick }: Props) {
     >
       <div className="border-b border-[color:color-mix(in_srgb,var(--saravafy-forest900)_12%,transparent)] bg-[color:color-mix(in_srgb,var(--saravafy-paper50)_92%,transparent)] shadow-[0_14px_34px_color-mix(in_srgb,var(--saravafy-forest900)_10%,transparent)]">
         <div className="mx-auto flex min-h-[var(--landing-header-height)] max-w-[1100px] items-center justify-between gap-3 px-4 py-[10px] max-[420px]:px-3 min-[960px]:px-6 min-[1200px]:px-7">
-          <div className="inline-flex min-w-0 items-center" aria-label="Saravafy">
+          <div
+            className="inline-flex min-w-0 items-center"
+            aria-label="Saravafy"
+          >
             <Image
               src="/images/saravafy-logo-full-light.png"
               alt="Saravafy"
