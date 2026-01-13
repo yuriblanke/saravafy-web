@@ -11,8 +11,8 @@ html[data-theme="dark"] {
 
 /* Se você quiser mapear alguns tokens para variáveis “semânticas” do app web */
 :root {
-  --background: var(--saravafy-background, #ffffff);
-  --foreground: var(--saravafy-foreground, #171717);
+  --background: var(--saravafy-background);
+  --foreground: var(--saravafy-foreground);
 }
 
 /* Se estiver usando o sistema de theme do Tailwind v4 */
