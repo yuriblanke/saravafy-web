@@ -35,7 +35,8 @@ export function Hero() {
           Saravafy
         </h1>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-[color:var(--saravafy-textSecondaryOnDark)] md:text-lg">
-          Preservar, registrar e compartilhar pontos com respeito e responsabilidade.
+          Preservar, registrar e compartilhar pontos com respeito e
+          responsabilidade.
         </p>
 
         <div className="mt-8 flex w-full flex-col items-center gap-3 md:w-auto md:flex-row md:items-start">

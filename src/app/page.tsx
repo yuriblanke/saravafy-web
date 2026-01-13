@@ -1,21 +1,14 @@
-import { Header } from "@/components/Header/Header";
-import { Hero } from "@/components/Hero/Hero";
-
 import type { Metadata } from "next";
 
+import { Landing } from "@/components/Landing/Landing";
+
 export const metadata: Metadata = {
-  title: "Saravafy — Acervo vivo de pontos de Umbanda",
-  description:
-    "Saravafy é um acervo vivo de pontos de Umbanda — preservar, registrar e compartilhar com respeito e responsabilidade.",
+  title: "Saravafy",
+  description: "Um acervo digital vivo de pontos de Umbanda",
 };
 
 export default function HomePage() {
   return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-      </main>
-    </>
+    <Landing />
   );
 }

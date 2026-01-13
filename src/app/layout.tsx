@@ -6,6 +6,24 @@ export const metadata: Metadata = {
   title: "Saravafy",
   description:
     "Preservar, registrar e compartilhar pontos com respeito e responsabilidade.",
+  icons: {
+    icon: [
+      {
+        url: "/images/favicon-light-mode.png",
+        type: "image/png",
+      },
+      {
+        url: "/images/favicon-light-mode.png",
+        type: "image/png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/images/favicon-dark-mode.png",
+        type: "image/png",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+  },
 };
 
 const lightVars = buildThemeCssVars("light");
