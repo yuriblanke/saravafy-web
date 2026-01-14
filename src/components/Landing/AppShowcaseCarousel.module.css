@@ -294,3 +294,68 @@
     width: 292px;
   }
 }
+
+@media (max-width: 768px) {
+  .layout {
+    gap: 12px;
+  }
+
+  .controls {
+    margin-top: 8px;
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .dots {
+    gap: 6px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .dotActive {
+    width: 14px;
+  }
+
+  .playPause {
+    min-width: 38px;
+    min-height: 38px;
+    padding: 6px 10px;
+  }
+
+  .carouselWrap {
+    /* Ajuda a reduzir o “hero secundário” sem tocar no desktop */
+    max-height: 48vh;
+  }
+
+  .swiper {
+    padding: 6px 0 8px;
+  }
+
+  .slide {
+    width: min(52vw, 210px);
+  }
+
+  .phone {
+    /* Reduz o footprint do phone no mobile mantendo o aspect-ratio interno */
+    padding: 8px;
+    max-height: 44vh;
+    overflow: hidden;
+
+    /* Crop inferior proposital + acabamento elegante (fade) */
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 84%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+}
