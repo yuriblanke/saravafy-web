@@ -21,7 +21,9 @@ function normalizeValue(value: unknown): string | null {
   return value;
 }
 
-async function fetchInstallUrlViaApi(signal?: AbortSignal): Promise<string | null> {
+async function fetchInstallUrlViaApi(
+  signal?: AbortSignal
+): Promise<string | null> {
   const res = await fetch("/api/install-url", {
     method: "GET",
     cache: "no-store",
@@ -33,13 +35,14 @@ async function fetchInstallUrlViaApi(signal?: AbortSignal): Promise<string | nul
   });
 
   if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(
-      `[Saravafy] Failed to fetch /api/install-url (${res.status}). ${text}`
-    );
+    // Falha de backend/config (ex.: env var ausente). Para o app web,
+    // tratamos como "url indisponível" sem explodir o clique do usuário.
+    // (O endpoint já carrega detalhes no payload; mantemos silêncio aqui.)
+    return null;
   }
 
   const json = (await res.json()) as InstallUrlResponse;
+  if (json?.error) return null;
   return normalizeValue(json?.value);
 }
 
