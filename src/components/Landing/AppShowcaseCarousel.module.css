@@ -8,6 +8,19 @@
   z-index: 4;
 }
 
+/* Typography (editorial hierarchy): keep scoped to this component */
+.text h2 {
+  font-size: 22px;
+  line-height: 1.12;
+  letter-spacing: 0.1px;
+}
+
+.text p {
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 52ch;
+}
+
 .controls {
   margin-top: 12px;
   display: inline-flex;
@@ -268,6 +281,19 @@
   border-radius: 15px;
   overflow: hidden;
   background: #0b0b0b;
+
+  /* Editorial bottom fade (desktop default). Mobile intensifies below. */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, #000 0%, #000 92%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }
 
 .screenImage {
@@ -286,8 +312,24 @@
 }
 
 @media (min-width: 960px) {
+  .text h2 {
+    font-size: 34px;
+    line-height: 1.06;
+    letter-spacing: -0.2px;
+  }
+
+  .text p {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 46ch;
+  }
+
+  .controls {
+    margin-top: 14px;
+  }
+
   .swiper {
-    padding: 8px 0 12px;
+    padding: 6px 0 10px;
   }
 
   .slide {
@@ -305,6 +347,17 @@
     width: 100%;
     justify-content: center;
     gap: 8px;
+  }
+
+  .text h2 {
+    font-size: 23px;
+    line-height: 1.1;
+  }
+
+  .text p {
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 56ch;
   }
 
   .dots {
@@ -328,7 +381,7 @@
 
   .carouselWrap {
     /* Ajuda a reduzir o “hero secundário” sem tocar no desktop */
-    max-height: 48vh;
+    max-height: 44vh;
   }
 
   .swiper {
@@ -336,26 +389,24 @@
   }
 
   .slide {
-    width: min(52vw, 210px);
+    width: min(48vw, 198px);
   }
 
   .phone {
     /* Reduz o footprint do phone no mobile mantendo o aspect-ratio interno */
     padding: 8px;
-    max-height: 44vh;
+    max-height: 40vh;
     overflow: hidden;
+  }
 
-    /* Crop inferior proposital + acabamento elegante (fade) */
+  .screenInner {
+    /* Intensifica o crop/fade no mobile para priorizar leitura */
     -webkit-mask-image: linear-gradient(
       to bottom,
       #000 0%,
-      #000 84%,
+      #000 78%,
       transparent 100%
     );
-    mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
+    mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
   }
 }

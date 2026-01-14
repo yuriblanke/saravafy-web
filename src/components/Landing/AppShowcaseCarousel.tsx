@@ -36,7 +36,7 @@ export function AppShowcaseCarousel() {
       {
         key: "colecoes",
         title: "Coleções",
-        copy: "Crie e gerencie coleções de pontos para estudo ou uso pela curimba do seu terreiro.",
+        copy: "Crie e gerencie coleções de pontos para estudo ou para uso da curimba do seu terreiro.",
         imageSrc: "/images/app-showcase/app-colecoes.webp",
       },
       {
