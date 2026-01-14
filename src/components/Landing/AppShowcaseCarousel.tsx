@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import type { Swiper as SwiperInstance } from "swiper";
+import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -47,20 +49,58 @@ export function AppShowcaseCarousel() {
     []
   );
 
+  const swiperRef = useRef<SwiperInstance | null>(null);
+  const inactivityTimeoutRef = useRef<number | null>(null);
+
+  const [isPlaying, setIsPlaying] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeItem = items[Math.min(Math.max(activeIndex, 0), items.length - 1)];
+  const activeItem =
+    items[Math.min(Math.max(activeIndex, 0), items.length - 1)];
+
+  const clearInactivityTimeout = useCallback(() => {
+    if (inactivityTimeoutRef.current == null) return;
+    window.clearTimeout(inactivityTimeoutRef.current);
+    inactivityTimeoutRef.current = null;
+  }, []);
+
+  const resetInactivityTimeout = useCallback(() => {
+    clearInactivityTimeout();
+    if (isPlaying) return;
+
+    inactivityTimeoutRef.current = window.setTimeout(() => {
+      setIsPlaying((current) => (current ? current : true));
+    }, 60_000);
+  }, [clearInactivityTimeout, isPlaying]);
+
+  const registerInteraction = useCallback(() => {
+    resetInactivityTimeout();
+  }, [resetInactivityTimeout]);
+
+  useEffect(() => {
+    const swiper = swiperRef.current;
+    if (!swiper?.autoplay) return;
+
+    if (isPlaying) {
+      clearInactivityTimeout();
+      swiper.autoplay.start();
+      return;
+    }
+
+    swiper.autoplay.stop();
+    resetInactivityTimeout();
+  }, [clearInactivityTimeout, isPlaying, resetInactivityTimeout]);
+
+  useEffect(() => clearInactivityTimeout, [clearInactivityTimeout]);
 
   return (
     <section
       aria-label="Demonstração do app"
-      className="mt-4 rounded-[18px] border border-[color:color-mix(in_srgb,var(--saravafy-forest900)_12%,transparent)] bg-[color:color-mix(in_srgb,var(--saravafy-paper100)_86%,transparent)] p-4 shadow-[0_16px_42px_color-mix(in_srgb,var(--saravafy-forest900)_14%,transparent)] min-[960px]:mt-[22px] min-[960px]:p-5"
+      className="mt-4 min-[960px]:mt-[22px]"
     >
-      <div className="grid grid-cols-1 gap-4 min-[960px]:grid-cols-[1fr_minmax(420px,520px)] min-[960px]:items-center min-[960px]:gap-6">
-        <div>
-          <div className="text-[12px] font-black tracking-[0.12em] text-[color:color-mix(in_srgb,var(--saravafy-textMutedOnLight)_88%,transparent)]">
-            APP SHOWCASE
-          </div>
-
+      <div
+        className={`${styles.layout} grid grid-cols-1 gap-4 min-[960px]:grid-cols-[1fr_minmax(420px,520px)] min-[960px]:items-center min-[960px]:gap-6`}
+      >
+        <div className={styles.text}>
           <h2 className="m-0 mt-2 text-[20px] font-black leading-[1.12] tracking-[0.1px] text-[color:var(--saravafy-textPrimaryOnLight)] min-[960px]:text-[22px]">
             {activeItem.title}
           </h2>
@@ -68,10 +108,45 @@ export function AppShowcaseCarousel() {
           <p className="m-0 mt-2 max-w-[54ch] text-[14px] leading-[1.5] text-[color:var(--saravafy-textSecondaryOnLight)] min-[960px]:text-[15px]">
             {activeItem.copy}
           </p>
+
+          <div className={styles.controls} aria-label="Controles do carousel">
+            <div className={styles.dots} aria-label="Paginação">
+              {items.map((item, index) => {
+                const isActive = index === activeIndex;
+                return (
+                  <button
+                    key={item.key}
+                    type="button"
+                    className={`${styles.dot} ${isActive ? styles.dotActive : ""}`}
+                    aria-label={`Ir para slide ${index + 1}`}
+                    aria-current={isActive}
+                    onClick={() => {
+                      registerInteraction();
+                      swiperRef.current?.slideToLoop(index);
+                    }}
+                  />
+                );
+              })}
+            </div>
+
+            <button
+              type="button"
+              className={styles.playPause}
+              aria-label={isPlaying ? "Pausar autoplay" : "Ativar autoplay"}
+              onClick={() => {
+                registerInteraction();
+                setIsPlaying((current) => !current);
+              }}
+            >
+              {isPlaying ? "Pause" : "Play"}
+            </button>
+          </div>
         </div>
 
         <div className={styles.carouselWrap}>
           <Swiper
+            modules={[Autoplay]}
+            loop
             slidesPerView="auto"
             centeredSlides
             spaceBetween={18}
@@ -79,7 +154,15 @@ export function AppShowcaseCarousel() {
             resistanceRatio={0.72}
             threshold={10}
             speed={420}
-            onSwiper={(swiper) => setActiveIndex(swiper.realIndex)}
+            autoplay={{ delay: 10_000, disableOnInteraction: false }}
+            onClick={registerInteraction}
+            onTouchStart={registerInteraction}
+            onSliderFirstMove={registerInteraction}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              setActiveIndex(swiper.realIndex);
+              if (!isPlaying) swiper.autoplay?.stop();
+            }}
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
             className={styles.swiper}
           >
