@@ -3,6 +3,7 @@
 import { useEffect, useMemo } from "react";
 
 import { LandingHero } from "@/components/Landing/Hero";
+import { AppShowcaseCarousel } from "@/components/Landing/AppShowcaseCarousel";
 
 import { useInstallModal } from "@/components/SiteChrome/InstallModalContext";
 import { useInstallDownloadAction } from "@/lib/useInstallDownloadAction";
@@ -49,6 +50,8 @@ export function Landing() {
         />
 
         <div className="mx-auto max-w-[520px] px-4 pb-8 pt-[22px] min-[960px]:max-w-[980px] min-[960px]:px-6 min-[960px]:pb-14 min-[960px]:pt-[34px] min-[1200px]:max-w-[1100px] min-[1200px]:px-7">
+          <AppShowcaseCarousel />
+
           <section
             className="mt-4 rounded-[18px] border border-[color:color-mix(in_srgb,var(--saravafy-forest900)_12%,transparent)] bg-[color:color-mix(in_srgb,var(--saravafy-paper100)_86%,transparent)] p-4 shadow-[0_16px_42px_color-mix(in_srgb,var(--saravafy-forest900)_14%,transparent)] min-[960px]:mt-[22px] min-[960px]:p-5"
             aria-label="Manifesto"
