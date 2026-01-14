@@ -42,7 +42,7 @@ export function AppShowcaseCarousel() {
       {
         key: "player",
         title: "Curimba",
-        copy: "Já teve que ficar procurando um ponto específico entre páginas e páginas de apostilas? Agora é só clicar na lupinha e buscar.",
+        copy: "Chega de procurar pontos entre páginas e páginas de apostilas! É só clicar na lupa e buscar.",
         imageSrc: "/images/app-showcase/app-player.webp",
       },
     ],
@@ -101,7 +101,7 @@ export function AppShowcaseCarousel() {
         className={`${styles.layout} grid grid-cols-1 gap-4 min-[960px]:grid-cols-[1fr_minmax(420px,520px)] min-[960px]:items-center min-[960px]:gap-6`}
       >
         <div className={styles.text}>
-          <h2 className="m-0 mt-2 text-[20px] font-black leading-[1.12] tracking-[0.1px] text-[color:var(--saravafy-textPrimaryOnLight)] min-[960px]:text-[22px]">
+          <h2 className="m-0 mt-2 text-[22px] font-black leading-[1.12] tracking-[0.1px] text-[color:var(--saravafy-textPrimaryOnLight)] min-[960px]:text-[22px]">
             {activeItem.title}
           </h2>
 

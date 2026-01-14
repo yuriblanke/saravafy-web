@@ -220,10 +220,16 @@
 .phoneViewport {
   /* Wrapper dedicado para o bottom fade editorial (não aplicar no <img>) */
   border-radius: 20px;
+  max-height: 65vh;
   overflow: hidden;
 
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 85%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, #000 0%, #000 85%, transparent 100%);
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
@@ -315,13 +321,13 @@
 
 @media (min-width: 960px) {
   .text h2 {
-    font-size: 34px;
+    font-size: 65px;
     line-height: 1.06;
     letter-spacing: -0.2px;
   }
 
   .text p {
-    font-size: 18px;
+    font-size: 30px;
     line-height: 1.6;
     max-width: 46ch;
   }
@@ -352,12 +358,12 @@
   }
 
   .text h2 {
-    font-size: 23px;
+    font-size: 33px;
     line-height: 1.1;
   }
 
   .text p {
-    font-size: 15px;
+    font-size: 18px;
     line-height: 1.55;
     max-width: 56ch;
   }
@@ -403,14 +409,26 @@
 
   .phoneViewport {
     /* Mobile: fade mais agressivo + menos phone visível */
-    max-height: 40vh;
-    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
+    max-height: 25vh;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 75%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(to bottom, #000 0%, #000 75%, transparent 100%);
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
     -webkit-mask-position: 0 0;
     mask-position: 0 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .phoneViewport {
+    max-height: 75vh;
+    overflow: hidden;
   }
 }
