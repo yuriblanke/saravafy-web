@@ -321,13 +321,14 @@
 
 @media (min-width: 960px) {
   .text h2 {
-    font-size: 65px;
+    /* Intermediate screens: slightly smaller than large desktop */
+    font-size: 52px;
     line-height: 1.06;
     letter-spacing: -0.2px;
   }
 
   .text p {
-    font-size: 30px;
+    font-size: 22px;
     line-height: 1.6;
     max-width: 46ch;
   }
@@ -427,8 +428,20 @@
 }
 
 @media (min-width: 1280px) {
+  .text h2 {
+    font-size: 65px;
+    line-height: 1.06;
+    letter-spacing: -0.2px;
+  }
+
+  .text p {
+    font-size: 30px;
+    line-height: 1.6;
+    max-width: 46ch;
+  }
+
   .phoneViewport {
-    max-height: 75vh;
+    max-height: 55vh;
     overflow: hidden;
   }
 }
