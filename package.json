@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@saravafy/design-tokens": "github:yuriblanke/saravafy-design-tokens#v0.1.0",
-    "next": "^15.5.2",
+    "next": "^15.5.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^10.1.0",
