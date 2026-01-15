@@ -1,0 +1,21 @@
+{
+  "name": "Saravafy",
+  "short_name": "Saravafy",
+  "description": "Preservar, registrar e compartilhar pontos com respeito e responsabilidade.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b2a21",
+  "icons": [
+    {
+      "src": "/icons/apple-icon-for-light-mode.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/favicon-light-mode.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+  ]
+}

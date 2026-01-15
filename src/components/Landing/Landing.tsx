@@ -31,7 +31,7 @@ export function Landing() {
   }, [openInstallModal]);
 
   return (
-    <div className="min-h-dvh text-[color:var(--saravafy-textPrimaryOnLight)]">
+    <div className="min-h-[100vh] min-h-[100svh] text-[color:var(--saravafy-textPrimaryOnLight)]">
       <div
         aria-hidden="true"
         className={`pointer-events-none fixed inset-0 -z-10 ${backgroundLayer}`}

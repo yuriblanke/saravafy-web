@@ -7,7 +7,7 @@ type Props = {
 export function LandingHero({ onInstallClick }: Props) {
   return (
     <section
-      className="relative overflow-hidden rounded-b-[18px] bg-[color:var(--saravafy-forest900)] min-h-[92vh] min-[960px]:min-h-[78vh] max-[640px]:min-h-[calc(100dvh-var(--landing-header-height,64px))]"
+      className="relative overflow-hidden rounded-b-[18px] bg-[color:var(--saravafy-forest900)] min-h-[92vh] min-h-[92svh] min-[960px]:min-h-[78vh] min-[960px]:min-h-[78svh] max-[640px]:min-h-[calc(100vh-var(--landing-header-height,64px))] max-[640px]:min-h-[calc(100svh-var(--landing-header-height,64px))]"
       aria-label="Saravafy"
     >
       <Image
