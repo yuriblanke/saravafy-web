@@ -15,10 +15,6 @@ html[data-theme="dark"] {
   --foreground: var(--saravafy-foreground);
 }
 
-html {
-  scrollbar-gutter: stable;
-}
-
 /* Se estiver usando o sistema de theme do Tailwind v4 */
 @theme inline {
   --color-background: var(--background);
