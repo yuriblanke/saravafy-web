@@ -22,9 +22,9 @@ function stripLeadingTitle(markdown: string): string {
 }
 
 async function readPolicyMarkdown(): Promise<string> {
-  const h = await headers();
-  const proto = h.get("x-forwarded-proto") ?? "https";
-  const host = h.get("x-forwarded-host") ?? h.get("host");
+  const headersList = headers();
+  const proto = headersList.get("x-forwarded-proto") ?? "https";
+  const host = headersList.get("x-forwarded-host") ?? headersList.get("host");
 
   const fallbackBaseUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||

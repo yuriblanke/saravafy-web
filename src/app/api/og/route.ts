@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 export async function GET(request: NextRequest) {
   const { origin } = new URL(request.url);
 
-  const heroImageUrl = `${origin}/images/bg-hero-saravafy.jpg`;
+  const heroImageUrl = `${origin}/images/bg-hero-saravafy.webp`;
 
   // WhatsApp/Telegram cache previews aggressively. Keep the URL stable, and bump
   // the querystring version in metadata when you need to force refresh.

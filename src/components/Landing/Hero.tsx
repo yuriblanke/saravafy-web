@@ -11,7 +11,7 @@ export function LandingHero({ onInstallClick }: Props) {
       aria-label="Saravafy"
     >
       <Image
-        src="/images/bg-hero-saravafy.jpg"
+        src="/images/bg-hero-saravafy.webp"
         alt=""
         fill
         priority
