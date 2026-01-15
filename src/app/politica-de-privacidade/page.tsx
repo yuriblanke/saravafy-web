@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -20,17 +19,12 @@ function stripLeadingTitle(markdown: string): string {
 }
 
 async function readPolicyMarkdown(): Promise<string> {
-  const h = await headers();
-  const proto = h.get("x-forwarded-proto") ?? "https";
-  const host = h.get("x-forwarded-host") ?? h.get("host");
-
-  const fallbackBaseUrl =
+  const baseUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
     process.env.SITE_URL ||
     "http://localhost:3000";
 
-  const origin = host ? `${proto}://${host}` : fallbackBaseUrl;
-  const url = new URL("/politica-de-privacidade.md", origin);
+  const url = new URL("/politica-de-privacidade.md", baseUrl);
 
   const response = await fetch(url, { cache: "force-cache" });
   if (!response.ok) {
