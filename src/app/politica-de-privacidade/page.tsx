@@ -104,7 +104,7 @@ export default function PrivacyPolicyPage() {
             </li>
             <li className="my-[6px]">
               Conteúdo enviado por meio de formulários de contato ou feedback
-              (ex.: "Tem algo errado aqui?")
+              (ex.: &quot;Tem algo errado aqui?&quot;)
             </li>
           </ul>
 
