@@ -1,7 +1,5 @@
-import fs from "node:fs";
-import path from "node:path";
-
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -21,17 +19,31 @@ function stripLeadingTitle(markdown: string): string {
   return String(markdown || "").replace(/^#\s+.*(?:\r?\n){1,2}/, "");
 }
 
-function readPolicyMarkdown(): string {
-  const filePath = path.join(
-    process.cwd(),
-    "public",
-    "politica-de-privacidade.md"
-  );
-  return fs.readFileSync(filePath, "utf8");
+async function readPolicyMarkdown(): Promise<string> {
+  const h = headers();
+  const proto = h.get("x-forwarded-proto") ?? "https";
+  const host = h.get("x-forwarded-host") ?? h.get("host");
+
+  const fallbackBaseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.SITE_URL ||
+    "http://localhost:3000";
+
+  const origin = host ? `${proto}://${host}` : fallbackBaseUrl;
+  const url = new URL("/politica-de-privacidade.md", origin);
+
+  const response = await fetch(url, { cache: "force-cache" });
+  if (!response.ok) {
+    throw new Error(
+      `Failed to load privacy policy markdown (${response.status})`
+    );
+  }
+
+  return response.text();
 }
 
-export default function PrivacyPolicyPage() {
-  const md = readPolicyMarkdown();
+export default async function PrivacyPolicyPage() {
+  const md = await readPolicyMarkdown();
   const lastUpdated = extractLastUpdated(md);
   const bodyMd = stripLeadingTitle(md);
 
