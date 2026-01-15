@@ -30,3 +30,20 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   overflow-x: hidden;
 }
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* For non-button elements behaving like buttons */
+[role="button"] {
+  cursor: pointer;
+}
+
+[role="button"][aria-disabled="true"] {
+  cursor: not-allowed;
+}
