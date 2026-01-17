@@ -145,6 +145,20 @@ export function Landing() {
             >
               Política de Privacidade
             </a>
+
+            <span
+              aria-hidden="true"
+              className="mx-1.5 inline-block text-[13px] text-[color:var(--saravafy-textMutedOnLight)]"
+            >
+              •
+            </span>
+
+            <a
+              className="inline-block rounded-[10px] px-3 py-[10px] text-[13px] text-[color:var(--saravafy-textMutedOnLight)] underline focus-visible:outline-none focus-visible:shadow-[0_0_0_3px_color-mix(in_srgb,var(--saravafy-forest400)_32%,transparent)]"
+              href="/termos-de-uso-interprete-de-ponto-audio"
+            >
+              Termos de Uso (Envio de Áudio)
+            </a>
           </footer>
         </div>
       </main>
